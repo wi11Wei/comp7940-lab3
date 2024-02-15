@@ -35,6 +35,7 @@ def main():
     # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler("add", add))
     dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(CommandHandler("hello", hello))
 
     # To start the bot:
     updater.start_polling()
@@ -75,8 +76,11 @@ def add(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Usage: /add <keyword>')
 
 
-def hello(update: Update, context: CallbackContext) -> None:
+def hello(update, context):
     """Send a message when the command /hello is issued."""
+    name = context.args[0] if len(context.args) > 0 else "Unknown"
+    response = f"Good day, {name}!"
+    context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
 
 if __name__ == '__main__':
