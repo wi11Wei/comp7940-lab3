@@ -12,8 +12,7 @@ jobs:
    - name: Checkout code
      uses: actions/checkout@v3
 
-   - name: Install Flyctl
-     run: superfly/flyctl-actions/setup-flyctl@master
+   - uses: superfly/flyctl-actions/setup-flyctl@master
 
    - name: Login to Fly.io
      run: flyctl auth login --access-token ${{ secrets.FLY_API_TOKEN }}
